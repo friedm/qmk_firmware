@@ -10,6 +10,8 @@
 
 #define KC_XXXX KC_NO
 
+#define QMK_KEYS_PER_SCAN 4
+
 enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
   EPRM,
@@ -112,7 +114,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * |         | XXXX |MsLeft| MsDn |MsRght| XXXX |------|           |------| Left | Down |  Up  | Right| XXXX |Ctrl/Esc|
  * |---------+------+------+------+------+------|MsWhDn|           | XXXX |------+------+------+------+------+--------|
- * |         | XXXX | XXXX | XXXX | XXXX | XXXX |      |           |      | End  | PgDn | PgUp | Home | XXXX | Shift  |
+ * |         | XXXX |MsBtn1|MsBtn2|MsBtn3| XXXX |      |           |      | End  | PgDn | PgUp | Home | XXXX | Shift  |
  * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   | XXXX  |      |      |      |      |                                       |      |      |      |      | XXXX |
  *   `-----------------------------------'                                       `----------------------------------'
@@ -130,7 +132,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_XXXX, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,   KC_XXXX,
        KC_TRNS, KC_XXXX, KC_XXXX, KC_MS_U, KC_XXXX,    KC_XXXX,   KC_MS_WH_UP,
        KC_TRNS, KC_XXXX, KC_MS_LEFT, KC_MS_D, KC_MS_RIGHT,      KC_RIGHT,
-       KC_TRNS, KC_XXXX, KC_XXXX, KC_XXXX, KC_XXXX,    KC_XXXX,   KC_MS_WH_DOWN,
+       KC_TRNS, KC_XXXX, KC_BTN1, KC_BTN2, KC_BTN3,    KC_XXXX,   KC_MS_WH_DOWN,
        KC_XXXX, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                            KC_TRNS,    KC_TRNS,
                                                        KC_TRNS,
@@ -159,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   | XXXX |      |      |      |      |                                       |      |      |      |      | XXXX |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        | VRSN | EPRM |       | Prev | Next |
+ *                                        | VRSN | RESET|       | Prev | Next |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      | XXXX |       |VolUp |      |      |
  *                                 | XXXX | XXXX |------|       |------| Mute | Play |
@@ -173,7 +175,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS, KC_XXXX, KC_MS_L, KC_MS_D, KC_MS_R, KC_XXXX,
        KC_TRNS, KC_XXXX, KC_XXXX, KC_XXXX, KC_XXXX, KC_XXXX, KC_XXXX,
        KC_XXXX, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                                           VRSN,    EPRM,
+                                           VRSN,    RESET,
                                                     KC_XXXX,
                                   KC_XXXX, KC_XXXX, KC_XXXX,
     // right hand
