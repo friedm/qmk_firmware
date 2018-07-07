@@ -64,19 +64,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Lower (Symb)
  * ,-----------------------------------------------------------------------------------.
- * |  `   |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   -  |   =  |  +   |
+ * |      |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   -  |   =  |  +   |
  * |------+------+------+------+------+-------------+------+------+------+------+------|
- * |  ~   |  (   |  )   |   [  |  ]   |   |  |  0   |   1  |  2   |   3  |   4  |  '   |
+ * |  \   |  (   |  )   |   [  |  ]   |   |  |  0   |   1  |  2   |   3  |   4  |  '   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |  _   |  <   |  >   |   {  |  }   |   \  |  5   |   6  |  7   |   8  |   9  |  "   |
+ * |      |  <   |  >   |   {  |  }   |   _  |  5   |   6  |  7   |   8  |   9  |  "   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |             |      | Next | Vol- | Vol+ | Play |
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = {
-  {KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,    KC_ASTR,    KC_MINS, KC_EQL, KC_PLUS},
-  {KC_TILD, KC_LPRN, KC_RPRN, KC_LBRC, KC_RBRC, KC_PIPE, KC_0,    KC_1,       KC_2,       KC_3,    KC_4,   KC_QUOT},
-  {KC_UNDS, KC_LT,   KC_GT,   KC_LCBR, KC_RCBR, KC_BSLS, KC_5,    KC_6,       KC_7,       KC_8,    KC_9,   KC_DQT},
+  {_______, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,    KC_ASTR,    KC_MINS, KC_EQL, KC_PLUS},
+  {KC_BSLS, KC_LPRN, KC_RPRN, KC_LBRC, KC_RBRC, KC_PIPE, KC_0,    KC_1,       KC_2,       KC_3,    KC_4,   KC_QUOT},
+  {_______, KC_LT,   KC_GT,   KC_LCBR, KC_RCBR, KC_UNDS, KC_5,    KC_6,       KC_7,       KC_8,    KC_9,   KC_DQT},
   {_______, _______, _______, _______, _______, _______, _______, _______,    KC_MNXT,    KC_VOLD, KC_VOLU, KC_MPLY}
 },
 
