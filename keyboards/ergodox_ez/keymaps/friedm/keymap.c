@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        | XXXX | XXXX |       | XXXX | XXXX |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | XXXX |       | XXXX |        |      |
- *                                 |Space | Symb |------|       |------|  Symb  | Navi |
+ *                                 |Space | Symb |------|       |------|  Navi  | Symb |
  *                                 |      |      | Back |       | Ins  |        |      |
  *                                 `--------------------'       `----------------------'
  */
@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               KC_RALT, KC_RGUI,     ALL_T(KC_NO),MEH_T(KC_NO),MO(MDIA),
         KC_XXXX,   KC_XXXX,
         KC_XXXX,
-        KC_INS,    MO(SYMB),  MO(NAVI)
+        KC_INS,    MO(NAVI),  MO(SYMB)
     ),
 /* Keymap 1: Symbol Layer
  *
