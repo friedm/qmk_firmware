@@ -3,10 +3,10 @@
 #include "action_layer.h"
 #include "version.h"
 
-#define BASE 0 // default layer
-#define SYMB 1 // symbols
-#define NAVI 2 // navigation
-#define MDIA 3 // media keys
+#define _BASE  0 // default layer
+#define _SYMB  1 // mousekeys and right hand symbols
+#define _MDIA  2 // media keys
+#define _NAVI 3 // hjkl and left hand symbols
 
 #define KC_XXXX KC_NO
 
@@ -16,7 +16,9 @@ enum custom_keycodes {
   PLACEHOLDER = SAFE_RANGE, // can always be here
   EPRM,
   VRSN,
-  RGB_SLD
+  RGB_SLD,
+  LDCBR,
+  RDCBR
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -37,45 +39,45 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        | XXXX | XXXX |       | XXXX | XXXX |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | XXXX |       | XXXX |        |      |
- *                                 |Space | Symb |------|       |------|  Navi  | Symb |
- *                                 |      |      | Back |       | Ins  |        |      |
+ *                                 |Space/| Symb |------|       |------| Navi   | Symb |
+ *                                 | Navi |      | Back |       | Ins  |        |      |
  *                                 `--------------------'       `----------------------'
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
-[BASE] = LAYOUT_ergodox(  // layer 0 : default
+[_BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
         KC_GRV,         KC_1,        KC_2,        KC_3,        KC_4,   KC_5,    KC_XXXX,
         KC_TAB,         KC_Q,        KC_W,        KC_E,        KC_R,   KC_T,    KC_HOME,
         CTL_T(KC_ESC),  KC_A,        KC_S,        KC_D,        KC_F,   KC_G,   
         KC_LSFT,        KC_Z,        KC_X,        KC_C,        KC_V,   KC_B,    KC_END,
-        MO(MDIA),       MEH_T(KC_NO),ALL_T(KC_NO),KC_LGUI,     KC_LALT,
+        MO(_MDIA),       MEH_T(KC_NO),ALL_T(KC_NO),KC_LGUI,     KC_LALT,
                                                                        KC_XXXX,KC_XXXX,
                                                                                KC_XXXX,
-                                                               KC_SPC,MO(SYMB),KC_BSPC,
+                                                                LT(_NAVI,KC_SPC),MO(_SYMB),KC_BSPC,
         // right hand
         KC_XXXX,   KC_6,      KC_7,    KC_8,        KC_9,        KC_0,        KC_BSPC,
         KC_PGUP,   KC_Y,      KC_U,    KC_I,        KC_O,        KC_P,        KC_BSLS,
                    KC_H,      KC_J,    KC_K,        KC_L,        KC_SCLN,     KC_ENT,
         KC_PGDN,   KC_N,      KC_M,    KC_COMM,     KC_DOT,      KC_SLSH,     KC_RSFT,
-                              KC_RALT, KC_RGUI,     ALL_T(KC_NO),MEH_T(KC_NO),MO(MDIA),
+                              KC_RALT, KC_RGUI,     ALL_T(KC_NO),MEH_T(KC_NO),MO(_MDIA),
         KC_XXXX,   KC_XXXX,
         KC_XXXX,
-        KC_INS,    MO(NAVI),  MO(SYMB)
+        KC_INS,    MO(_NAVI), MO(_SYMB)
     ),
-/* Keymap 1: Symbol Layer
+/* Keymap 1: symbols
  *
- * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |         |  F1  |  F2  |  F3  |  F4  |  F5  | F6   |           | F7   |  F8  |  F9  | F10  | F11  | F12  |        |
- * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
- * |    \    |   !  |   @  |   #  |  $   |   %  | XXXX |           | XXXX |   ^  |   &  |   *  |  -   |  =   |   +    |
- * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         |  (   |   )  |   [  |   ]  |   |  |------|           |------|   0  |   1  |   2  |   3  |   4  |   '    |
- * |---------+------+------+------+------+------| XXXX |           | XXXX |------+------+------+------+------+--------|
- * |         |  <   |   >  |   {  |   }  |   _  |      |           |      |   5  |   6  |   7  |   8  |   9  |   "    |
- * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | XXXX  |      |      |      |      |                                       |      |      |      |      | XXXX |
- *   `-----------------------------------'                                       `----------------------------------'
+ * ,---------------------------------------------------.         ,--------------------------------------------------.
+ * |         |  F1  |  F2  |  F3  |  F4  |  F5  | F6   |         | F7   |  F8  |  F9  | F10  | F11  | F12  |        |
+ * |---------+------+------+------+------+------+------|         |------+------+------+------+------+------+--------|
+ * |    =    |   !  |   @  |   #  |  $   |   %  | XXXX |         | XXXX |   ^  |   &  |   *  |   -  |   +  |   `    |
+ * |---------+------+------+------+------+------|      |         |      |------+------+------+------+------+--------|
+ * |         |  (   |   [  |   '  |   ]  |   )  |------|         |------|   0  |   1  |   2  |   3  |   4  |   |    |
+ * |---------+------+------+------+------+------| XXXX |         | XXXX |------+------+------+------+------+--------|
+ * |    _    |  <   |   {  |   "  |   }  |   >  |      |         |      |   5  |   6  |   7  |   8  |   9  |   ~    |
+ * `---------+------+------+------+------+-------------'         `-------------+------+------+------+------+--------'
+ *   | XXXX  |      |      |      |      |                                     |      |      |      |      | XXXX |   
+ *   `-----------------------------------'                                     `----------------------------------'   
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
@@ -84,50 +86,50 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-// SYMBOLS
-[SYMB] = LAYOUT_ergodox(
+// symbols, numbers, f-keys
+[_SYMB] = LAYOUT_ergodox(
        // left hand
        KC_TRNS,KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,
-       KC_BSLS,KC_EXLM,KC_AT,  KC_HASH,KC_DLR,KC_PERC,KC_XXXX,
-       KC_TRNS,KC_LPRN,KC_RPRN,KC_LBRC,KC_RBRC,KC_PIPE,
-       KC_TRNS,KC_LT,  KC_GT,KC_LCBR,KC_RCBR,KC_UNDS,KC_XXXX,
+       KC_EQL, KC_EXLM,KC_AT,  KC_HASH,KC_DLR, KC_PERC,KC_XXXX,
+       KC_TRNS,KC_LPRN,KC_LBRC,KC_QUOT,KC_RBRC,KC_RPRN,
+       KC_UNDS,KC_LT,  KC_LCBR,KC_DQT, KC_RCBR,KC_GT,KC_XXXX,
        KC_XXXX,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS,
                                        KC_TRNS,KC_TRNS,
                                                KC_TRNS,
                                KC_TRNS,KC_TRNS,KC_TRNS,
        // right hand
        KC_F7,   KC_F8,   KC_F9,    KC_F10,   KC_F11,   KC_F12,  KC_TRNS,
-       KC_XXXX, KC_CIRC, KC_AMPR,  KC_ASTR,  KC_MINS,  KC_EQL,  KC_PLUS,
-                KC_0,    KC_1,     KC_2,     KC_3,     KC_4,    KC_QUOT,
-       KC_XXXX, KC_5,    KC_6,     KC_7,     KC_8,     KC_9,    KC_DQT,
+       KC_XXXX, KC_CIRC, KC_AMPR,  KC_ASTR,  KC_MINS,  KC_PLUS, KC_GRV,
+                KC_0,    KC_1,     KC_2,     KC_3,     KC_4,    KC_PIPE,
+       KC_XXXX, KC_5,    KC_6,     KC_7,     KC_8,     KC_9,    KC_TILD,
                          KC_TRNS,  KC_TRNS,  KC_TRNS,  KC_TRNS, KC_XXXX,
        KC_TRNS, KC_TRNS,
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
 ),
-/* Keymap 2: Navigation Layer
+/* Keymap 3: navigation
  *
- * ,---------------------------------------------------.           ,--------------------------------------------------.
- * |  XXXX   |      |      |      |      |      | XXXX |           | XXXX |      |      |      |      |      | XXXX   |
- * |---------+------+------+------+------+------+------|           |------+------+------+------+------+------+--------|
- * |         | XXXX | XXXX | MsUp | XXXX | XXXX |MsWhUp|           | XXXX | MsLf | MsDn | MsUp | MsRg | XXXX | Tab    |
- * |---------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |         | XXXX |MsLeft| MsDn |MsRght| XXXX |------|           |------| Left | Down |  Up  | Right| XXXX |Ctrl/Esc|
- * |---------+------+------+------+------+------|MsWhDn|           | XXXX |------+------+------+------+------+--------|
- * |         | XXXX |MsBtn1|MsBtn2|MsBtn3| XXXX |      |           |      | End  | PgDn | PgUp | Home | XXXX | Shift  |
- * `---------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   | XXXX  |      |      |      |      |                                       |      |      |      |      | XXXX |
- *   `-----------------------------------'                                       `----------------------------------'
+ * ,---------------------------------------------------.         ,--------------------------------------------------.  
+ * |  XXXX   |      |      |      |      |      | XXXX |         | XXXX |      |      |      |      |      |        |  
+ * |---------+------+------+------+------+------+------|         |------+------+------+------+------+------+--------|  
+ * |         | XXXX | XXXX | MsUp | XXXX | XXXX |MsWhUp|         | XXXX |  0   |  {{  |  }}  |   $  | XXXX |        |  
+ * |---------+------+------+------+------+------|      |         |      |------+------+------+------+------+--------|  
+ * |         | XXXX |MsLeft| MsDn |MsRght| XXXX |------|         |------| Left | Down |  Up  | Right| XXXX |        |  
+ * |---------+------+------+------+------+------|MsWhDn|         | XXXX |------+------+------+------+------+--------|  
+ * |         | XXXX |MsBtn1|MsBtn2|MsBtn3| XXXX |      |         |      | End  | PgDn | PgUp | Home |      |        |  
+ * `---------+------+------+------+------+-------------'         `-------------+------+------+------+------+--------'  
+ *   | XXXX  |      |      |      |      |                                      |      |      |      |      | XXXX |
+ *   `-----------------------------------'                                      `----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |      |
  *                                 ,------|------|------|       |------+------+------.
  *                                 |      |      |      |       |      |      |      |
- *                                 |MsBtn1|MsBtn2|------|       |------|      |      |
- *                                 |      |      |MsBtn3|       |      |      |      |
+ *                                 |      |      |------|       |------|      |      |
+ *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-// Navigation
-[NAVI] = LAYOUT_ergodox(
+// mousekeys, arrow keys, pgup/dn, vim movement
+[_NAVI] = LAYOUT_ergodox(
        // left hand
        KC_XXXX, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,   KC_XXXX,
        KC_TRNS, KC_XXXX, KC_XXXX, KC_MS_U, KC_XXXX,    KC_XXXX,   KC_MS_WH_UP,
@@ -136,18 +138,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_XXXX, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                            KC_TRNS,    KC_TRNS,
                                                        KC_TRNS,
-                                           KC_MS_BTN1, KC_MS_BTN2,KC_MS_BTN3,
+                                           KC_TRNS,    KC_TRNS, KC_TRNS,
        // right hand
-       KC_XXXX,        KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS,KC_XXXX,
-       KC_MS_WH_UP,    KC_MS_L,KC_MS_D,KC_MS_U,KC_MS_R, KC_XXXX,KC_TRNS,
-                       KC_LEFT,KC_DOWN,KC_UP,  KC_RIGHT,KC_XXXX,KC_TRNS,
-       KC_MS_WH_DOWN,  KC_END, KC_PGDN,KC_PGUP,KC_HOME, KC_XXXX,KC_TRNS,
-                               KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS,KC_XXXX,
+       KC_XXXX,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS,KC_TRNS,
+       KC_XXXX,KC_0,   LDCBR,  RDCBR,  KC_DLR,  KC_XXXX,KC_TRNS,
+               KC_LEFT,KC_DOWN,KC_UP,  KC_RIGHT,KC_XXXX,KC_TRNS,
+       KC_XXXX,KC_END, KC_PGDN,KC_PGUP,KC_HOME, KC_TRNS,KC_TRNS,
+                               KC_TRNS,KC_TRNS, KC_TRNS,KC_TRNS,KC_XXXX,
        KC_TRNS,KC_TRNS,
        KC_TRNS,
        KC_TRNS,KC_TRNS,KC_TRNS
 ),
-/* Keymap 3: Media
+/* Keymap 2: Media
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
  * | XXXX   | F1   | F2   | F3   | F4   | F5   | F6   |           | F7   | F8   | F9   | F10  | F11  | F12  | XXXX   |
@@ -168,8 +170,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      | XXXX |       |VolDn |      |      |
  *                                 `--------------------'       `--------------------'
  */
-// MEDIA, MOUSE, FUNCTION
-[MDIA] = LAYOUT_ergodox(
+// MEDIA, FUNCTION
+[_MDIA] = LAYOUT_ergodox(
        KC_XXXX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,
        KC_TRNS, KC_XXXX, KC_XXXX, KC_XXXX, KC_XXXX, KC_XXXX, KC_XXXX,
        KC_TRNS, KC_XXXX, KC_MS_L, KC_MS_D, KC_MS_R, KC_XXXX,
@@ -191,7 +193,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 const uint16_t PROGMEM fn_actions[] = {
-    [1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
+    [1] = ACTION_LAYER_TAP_TOGGLE(_SYMB)                // FN1 - Momentary Layer 1
 };
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
@@ -232,6 +234,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         #ifdef RGBLIGHT_ENABLE
           rgblight_mode(1);
         #endif
+      }
+      return false;
+      break;
+    case LDCBR:
+      if (record->event.pressed) {
+        SEND_STRING ("{{");
+      }
+      return false;
+      break;
+    case RDCBR:
+      if (record->event.pressed) {
+        SEND_STRING ("}}");
       }
       return false;
       break;
