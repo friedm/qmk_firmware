@@ -112,10 +112,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.         ,--------------------------------------------------.  
  * |  XXXX   |      |      |      |      |      | XXXX |         | XXXX |      |      |      |      |      |        |  
  * |---------+------+------+------+------+------+------|         |------+------+------+------+------+------+--------|  
- * |         | XXXX | XXXX | MsUp | XXXX | XXXX |MsWhUp|         | XXXX |  0   |  {{  |  }}  |   $  | XXXX |        |  
+ * |         | XXXX | XXXX | MsUp | XXXX | XXXX | XXXX |         | XXXX |MsWhLf|MsWhDn|MsWhUp|MsWhRt| XXXX |        |  
  * |---------+------+------+------+------+------|      |         |      |------+------+------+------+------+--------|  
  * |         | XXXX |MsLeft| MsDn |MsRght| XXXX |------|         |------| Left | Down |  Up  | Right| XXXX |        |  
- * |---------+------+------+------+------+------|MsWhDn|         | XXXX |------+------+------+------+------+--------|  
+ * |---------+------+------+------+------+------| XXXX |         | XXXX |------+------+------+------+------+--------|  
  * |         | XXXX |MsBtn1|MsBtn2|MsBtn3| XXXX |      |         |      | Home | PgDn | PgUp | End  |      |        |  
  * `---------+------+------+------+------+-------------'         `-------------+------+------+------+------+--------'  
  *   | XXXX  |      |      |      |      |                                      |      |      |      |      | XXXX |
@@ -132,16 +132,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_NAVI] = LAYOUT_ergodox(
        // left hand
        KC_XXXX, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,   KC_XXXX,
-       KC_TRNS, KC_XXXX, KC_XXXX, KC_MS_U, KC_XXXX,    KC_XXXX,   KC_MS_WH_UP,
-       KC_TRNS, KC_XXXX, KC_MS_LEFT, KC_MS_D, KC_MS_RIGHT,      KC_RIGHT,
-       KC_TRNS, KC_XXXX, KC_BTN1, KC_BTN2, KC_BTN3,    KC_XXXX,   KC_MS_WH_DOWN,
+       KC_TRNS, KC_XXXX, KC_XXXX, KC_MS_U, KC_XXXX,    KC_XXXX,   KC_XXXX,
+       KC_TRNS, KC_XXXX, KC_MS_LEFT, KC_MS_D, KC_MS_RIGHT,KC_RIGHT,
+       KC_TRNS, KC_XXXX, KC_BTN1, KC_BTN2, KC_BTN3,    KC_XXXX,   KC_XXXX,
        KC_XXXX, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                            KC_TRNS,    KC_TRNS,
                                                        KC_TRNS,
                                            KC_TRNS,    KC_TRNS, KC_TRNS,
        // right hand
        KC_XXXX,KC_TRNS,KC_TRNS,KC_TRNS,KC_TRNS, KC_TRNS,KC_TRNS,
-       KC_XXXX,KC_0,   LDCBR,  RDCBR,  KC_DLR,  KC_XXXX,KC_TRNS,
+       KC_XXXX,KC_MS_WH_LEFT,KC_MS_WH_DOWN,KC_MS_WH_UP,KC_MS_WH_RIGHT,  KC_XXXX,KC_TRNS,
                KC_LEFT,KC_DOWN,KC_UP,  KC_RIGHT,KC_XXXX,KC_TRNS,
        KC_XXXX,KC_HOME,KC_PGDN,KC_PGUP,KC_END,  KC_TRNS,KC_TRNS,
                                KC_TRNS,KC_TRNS, KC_TRNS,KC_TRNS,KC_XXXX,
