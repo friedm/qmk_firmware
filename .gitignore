@@ -70,3 +70,4 @@ id_rsa_*
 /.vs
 *.swo
 *.swp
+*.swn
